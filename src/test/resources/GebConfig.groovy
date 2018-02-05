@@ -10,9 +10,17 @@ import org.openqa.selenium.remote.DesiredCapabilities
 //driver = "firefox"
 
 driver = {
-    def firefox = new FirefoxDriver()
-    firefox.manage().window().maximize()
-    return firefox
+    System.setProperty("webdriver.chrome.driver","D:\\MyProjects\\GebFramework\\src\\test\\resources\\lib\\windows\\chromedriver.exe")
+
+    /*You are using an unsupported command-line flag:
+    ignore-certificate-errors.*/
+    DesiredCapabilities capabilities = DesiredCapabilities.chrome()
+    ChromeOptions options = new ChromeOptions()
+    options.addArguments("test-type", "start-maximized", "disable-extensions")
+    capabilities.setCapability(ChromeOptions.CAPABILITY, options)
+    capabilities.setCapability("chrome.binary","D:\\MyProjects\\GebFramework\\src\\test\\resources\\lib\\windows\\chromedriver.exe")
+    def chrome = new ChromeDriver(capabilities)
+    return chrome
 }
 
 
@@ -28,7 +36,7 @@ environments {
 
     chrome {
         driver = {
-            System.setProperty("webdriver.chrome.driver","E:/MyIDEAPROJ/sample-code-master/sample-code/examples/java/GebAdvanced/src/lab/chromedriver.exe")
+            System.setProperty("webdriver.chrome.driver","D:\\MyProjects\\GebFramework\\src\\test\\resources\\lib\\windows\\chromedriver.exe")
 
             /*You are using an unsupported command-line flag:
             ignore-certificate-errors.*/
@@ -36,7 +44,7 @@ environments {
             ChromeOptions options = new ChromeOptions()
             options.addArguments("test-type", "start-maximized", "disable-extensions")
             capabilities.setCapability(ChromeOptions.CAPABILITY, options)
-            capabilities.setCapability("chrome.binary","E:/MyIDEAPROJ/sample-code-master/sample-code/examples/java/GebAdvanced/src/lab/chromedriver.exe")
+            capabilities.setCapability("chrome.binary","D:\\MyProjects\\GebFramework\\src\\test\\resources\\lib\\windows\\chromedriver.exe")
             def chrome = new ChromeDriver(capabilities)
             return chrome
         }
